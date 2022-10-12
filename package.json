@@ -1,0 +1,33 @@
+{
+  "name":         "tree-sitter-elsa",
+  "version":      "1.0.0",
+  "description":  "tree-sitter for elsa!",
+  "main":         "bindings/node",
+  "scripts": {
+    "test":       "tree-sitter test",
+    "parse":      "tree-sitter parse test/sample/foo.lc",
+    "highlight":  "tree-sitter highlight test/sample/foo.lc"
+  },
+  "keywords": [
+    "elsa"
+  ],
+  "author":       "astrlux",
+  "license": "",
+  "dependencies": {
+    "nan":        "^2.15.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.6"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.lc",
+      "file-types": [
+        "lc"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ]
+}

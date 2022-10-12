@@ -1,0 +1,54 @@
+========================
+NORMALIZE AN ABSTRACTION
+========================
+eval alpha :
+  (\x -> x)
+  =a> (\y -> y)
+  =a> (\z -> z)
+
+---
+(program
+  (reduction
+    (reduction_identifier)
+    (reduction_contents
+      (newline)
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline)
+      (step
+        (alpha_convert))
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline)
+      (step
+        (alpha_convert))
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline))))

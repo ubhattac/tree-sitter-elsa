@@ -1,0 +1,311 @@
+=============================
+PARSE INTEGRATED ELSA PROGRAM
+=============================
+let ID   = \x -> x
+let ZERO = \f x -> x
+let ONE  = \f x -> f x
+let TWO  = \f x -> f (f x)
+let INCR = \n f x -> f (n f x)
+
+eval alpha_equiv : 
+  (\x -> x)
+  =a> (\y -> y)
+  =a> (\z -> z)
+
+eval id_zero :
+  ID ZERO
+  =d> (\x -> x) (\f x -> x)
+  =b> (\f x -> x)
+  =d> ZERO 
+
+eval succ_one :
+  INCR ONE 
+  =*> \f x -> f (ONE f x)
+  =*> \f x -> f (f x)
+  =d> TWO 
+
+eval succ_one_normal :
+  INCR ONE
+  =~> TWO 
+
+---
+
+(program
+  (abstraction_definition
+    (abstraction_identifier)
+    (equivalence)
+    (expression
+      (term
+        (abstraction
+          (binder)
+          (identifier)
+          (separator)
+          (abstraction_body
+            (term
+              (terminal
+                (identifier))))))
+      (newline)))
+  (abstraction_definition
+    (abstraction_identifier)
+    (equivalence)
+    (expression
+      (term
+        (abstraction
+          (binder)
+          (identifier)
+          (identifier)
+          (separator)
+          (abstraction_body
+            (term
+              (terminal
+                (identifier))))))
+      (newline)))
+  (abstraction_definition
+    (abstraction_identifier)
+    (equivalence)
+    (expression
+      (term
+        (abstraction
+          (binder)
+          (identifier)
+          (identifier)
+          (separator)
+          (abstraction_body
+            (term
+              (terminal
+                (identifier))))))
+      (term
+        (terminal
+          (identifier)))
+      (newline)))
+  (abstraction_definition
+    (abstraction_identifier)
+    (equivalence)
+    (expression
+      (term
+        (abstraction
+          (binder)
+          (identifier)
+          (identifier)
+          (separator)
+          (abstraction_body
+            (term
+              (terminal
+                (identifier))))))
+      (term
+        (group
+          (term
+            (terminal
+              (identifier)))
+          (term
+            (terminal
+              (identifier)))))
+      (newline)))
+  (abstraction_definition
+    (abstraction_identifier)
+    (equivalence)
+    (expression
+      (term
+        (abstraction
+          (binder)
+          (identifier)
+          (identifier)
+          (identifier)
+          (separator)
+          (abstraction_body
+            (term
+              (terminal
+                (identifier))))))
+      (term
+        (group
+          (term
+            (terminal
+              (identifier)))
+          (term
+            (terminal
+              (identifier)))
+          (term
+            (terminal
+              (identifier)))))
+      (newline)))
+  (reduction
+    (reduction_identifier)
+    (reduction_contents
+      (newline)
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline)
+      (step
+        (alpha_convert))
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline)
+      (step
+        (alpha_convert))
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline)))
+  (reduction
+    (reduction_identifier)
+    (reduction_contents
+      (newline)
+        (term
+          (terminal
+            (abstraction_identifier)))
+        (term
+          (terminal
+            (abstraction_identifier)))
+      (newline)
+      (step
+        (let_expand))
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline)
+      (step
+        (beta_reduce))
+        (term
+          (group
+            (term
+              (abstraction
+                (binder)
+                (identifier)
+                (identifier)
+                (separator)
+                (abstraction_body
+                  (term
+                    (terminal
+                      (identifier))))))))
+      (newline)
+      (step
+        (let_expand))
+        (term
+          (terminal
+            (abstraction_identifier)))
+      (newline)))
+  (reduction
+    (reduction_identifier)
+    (reduction_contents
+      (newline)
+        (term
+          (terminal
+            (abstraction_identifier)))
+        (term
+          (terminal
+            (abstraction_identifier)))
+      (newline)
+      (step
+        (reflexive_transitive))
+        (term
+          (abstraction
+            (binder)
+            (identifier)
+            (identifier)
+            (separator)
+            (abstraction_body
+              (term
+                (terminal
+                  (identifier))))))
+        (term
+          (group
+            (term
+              (terminal
+                (abstraction_identifier)))
+            (term
+              (terminal
+                (identifier)))
+            (term
+              (terminal
+                (identifier)))))
+      (newline)
+      (step
+        (reflexive_transitive))
+        (term
+          (abstraction
+            (binder)
+            (identifier)
+            (identifier)
+            (separator)
+            (abstraction_body
+              (term
+                (terminal
+                  (identifier))))))
+        (term
+          (group
+            (term
+              (terminal
+                (identifier)))
+            (term
+              (terminal
+                (identifier)))))
+      (newline)
+      (step
+        (let_expand))
+        (term
+          (terminal
+            (abstraction_identifier)))
+      (newline)))
+  (reduction
+    (reduction_identifier)
+    (reduction_contents
+      (newline)
+        (term
+          (terminal
+            (abstraction_identifier)))
+        (term
+          (terminal
+            (abstraction_identifier)))
+      (newline)
+      (step
+        (normalize))
+        (term
+          (terminal
+            (abstraction_identifier)))
+      (newline))))

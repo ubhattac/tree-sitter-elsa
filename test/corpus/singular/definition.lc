@@ -1,0 +1,23 @@
+=========
+DEFINE AN ABSTRACTION
+=========
+let TRUE = \x y -> x
+
+---
+
+(program
+  (abstraction_definition
+    (abstraction_identifier)
+    (equivalence)
+    (expression
+      (term
+        (abstraction
+          (binder)
+          (identifier)
+          (identifier)
+          (separator)
+          (abstraction_body
+            (term
+              (terminal
+                (identifier))))))
+      (newline))))
